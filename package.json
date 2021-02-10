@@ -1,0 +1,27 @@
+{
+  "name": "elecciones-mysql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "8.4.0"
+  },
+  "author": "ed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://www.cooprofesionales.com.pa/"
+  },
+  "homepage": "https://www.cooprofesionales.com.pa/",
+  "dependencies": {
+    "express": "^4.16.4",
+    "express.io": "^1.1.13",
+    "lodash.where": "^3.1.0",
+    "moment": "^2.29.1",
+    "mysql": "^2.18.1",
+    "socket.io": "^1.4.8"
+  }
+}
