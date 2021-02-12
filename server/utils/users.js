@@ -94,7 +94,7 @@ class Users {
             return  {id: user.id, num_cliente: user.num_cliente, nombre: user.nombre, agencia: user.agencia, sala: user.sala, name_evento: user.name_evento};
         });
         
-        console.log(namesArray);
+        //console.log(namesArray);
 
         return namesArray;
 

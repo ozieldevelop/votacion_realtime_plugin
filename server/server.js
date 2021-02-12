@@ -14,7 +14,7 @@ var io = socketIO(server);
 
 var isInitNotes = false;
 
-//var salon = 'asistencia_evento_coope';
+var salon = 'asistencia_evento_coope';
 
 app.use(express.static('./public'));
 
@@ -54,11 +54,27 @@ io.on('connection', (socket) => {
         //console.log(user);
         if(user){ 
             //console.log(`${user.num_cliente} was Disconnected to server in room ${salon}`);
-            //io.to(salon).emit('updateUserList', users.getUserList(salon));
+            io.to(user).emit('updateUserList', users.getUserList(salon));
         }
     });
+  
+    socket.on('atencion', (param, callback) => {
+           io.to(param.sala).emit('bloquearexplorer');
+    });   
+  
+    socket.on('mensajedirecto', (param, callback) => {
+      // console.log(param.usuario);
+      io.to(param.usuario).emit('serviciomensajedirecto', param);
+          //io.sockets.to(socket.id)
+    }); 
+  
+    socket.on('mensajesala', (param, callback) => {
+       io.to(param.sala).emit('serviciomensajesala', param);
+    });     
 
 });
+
+
 
 server.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);
