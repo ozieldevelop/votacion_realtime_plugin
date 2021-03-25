@@ -37,25 +37,26 @@ io.on('connection', (socket) => {
     socket.on('join', (param, callback) => {
        //console.log(param.num_cliente+'   '+ param.nombre +'   '+ param.agencia  );
        //console.log(param);
-      
-       socket.join(param.sala);
-      
-       users.removeUser(socket.id);
-        
+        users.removeUser(socket.id);
+        socket.join(param.sala);
+ 
        users.addUser(socket.id,param.num_cliente,param.nombre, param.agencia,param.sala,decodeURI(param.name_evento));
       
        io.to(param.sala).emit('updateUserList', users.getUserList(param.sala));
+       //io.to(param.sala).emit('updateUserList');
       
     });
     
 
-    socket.on('disconnect', () => {
+    socket.on('disconnect', (param, callback) => {
+        //console.log(socket.id);
         var user = users.removeUser(socket.id);
         //console.log(user);
-        if(user){ 
+        //console.log(users.getUserList(salon));
             //console.log(`${user.num_cliente} was Disconnected to server in room ${salon}`);
-            io.to(user).emit('updateUserList', users.getUserList(salon));
-        }
+        console.log(param.sala);
+        io.to(user.sala).emit('updateUserList', users.getUserList(param.sala));
+        console.log('entro');
     });
   
     socket.on('atencion', (param, callback) => {
